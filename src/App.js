@@ -90,21 +90,30 @@ function App() {
 
   const addToFavoriteItemsClick = async (obj) => {
     try {
-      if (
-        favoriteItems.find((favObj) => Number(favObj.id) === Number(obj.id))
-      ) {
+      const findItem = favoriteItems.find(
+        (item) => Number(item.parentId) === Number(obj.id)
+      );
+      if (findItem) {
         setFavoriteItems((prev) =>
-          prev.filter((item) => Number(item.id) !== Number(obj.id))
+          prev.filter((item) => Number(item.parentId) !== Number(obj.id))
         );
         axios.delete(
-          `https://612a4354068adf001789baa2.mockapi.io/favoriteItems/${obj.id}`
+          `https://612a4354068adf001789baa2.mockapi.io/favoriteItems/${findItem.id}`
         );
       } else {
+        setFavoriteItems((prev) => [...prev, obj]);
         const { data } = await axios.post(
           "https://612a4354068adf001789baa2.mockapi.io/favoriteItems",
           obj
         );
-        setFavoriteItems((prev) => [...prev, data]);
+        setFavoriteItems((prev) =>
+          prev.map((item) => {
+            if (item.parentId === data.parentId) {
+              return { ...item, id: data.id };
+            }
+            return item;
+          })
+        );
       }
     } catch (error) {
       alert("Не удалось добавить в любимое");
@@ -120,6 +129,10 @@ function App() {
     return cartItems.some((obj) => Number(obj.parentId) === Number(id));
   };
 
+  const isAddedToFavoriteItems = (id) => {
+    return favoriteItems.some((obj) => Number(obj.parentId) === Number(id));
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -127,6 +140,7 @@ function App() {
         cartItems,
         favoriteItems,
         isAddedToCart,
+        isAddedToFavoriteItems,
         addToFavoriteItemsClick,
         addToCartClick,
         setCartIsOpened,

@@ -13,7 +13,7 @@ function Header(props) {
             className="mr-10"
             width={40}
             heigth={40}
-            src="/img/logo.png"
+            src="img/logo.png"
             alt="Logo"
           />
           <div>
@@ -28,7 +28,7 @@ function Header(props) {
             className="mr-10"
             width={18}
             heigth={18}
-            src="/img/cart.svg"
+            src="img/cart.svg"
             alt="Cart"
           />
           <span>
@@ -37,12 +37,12 @@ function Header(props) {
         </li>
         <li className="mr-20 cu-p">
           <Link to="/favorites">
-            <img width={18} heigth={18} src="/img/heart.svg" alt="Favorites" />
+            <img width={18} heigth={18} src="img/heart.svg" alt="Favorites" />
           </Link>
         </li>
         <li>
           <Link to="/orders">
-            <img width={18} heigth={18} src="/img/user.svg" alt="User" />
+            <img width={18} heigth={18} src="img/user.svg" alt="User" />
           </Link>
         </li>
       </ul>
