@@ -1,17 +1,9 @@
-import React from "react";
-import ContentLoader from "react-content-loader";
-import styles from "./Card.module.scss";
-import AppContext from "../../context";
+import React from 'react';
+import ContentLoader from 'react-content-loader';
+import styles from './Card.module.scss';
+import AppContext from '../../context';
 
-function Card({
-  id,
-  title,
-  imageUrl,
-  price,
-  addToFavorite,
-  addToCart,
-  contentLoaded = false,
-}) {
+function Card({ id, title, imageUrl, price, addToFavorite, addToCart, contentLoaded = false }) {
   const { isAddedToCart } = React.useContext(AppContext);
   const { isAddedToFavoriteItems } = React.useContext(AppContext);
   const obj = { id, parentId: id, title, imageUrl, price };
@@ -33,8 +25,7 @@ function Card({
           height={229}
           viewBox="0 0 150 202"
           backgroundColor="#f3f3f3"
-          foregroundColor="#ecebeb"
-        >
+          foregroundColor="#ecebeb">
           <rect x="0" y="0" rx="10" ry="10" width="150" height="100" />
           <rect x="0" y="118" rx="5" ry="5" width="150" height="15" />
           <rect x="0" y="141" rx="5" ry="5" width="100" height="15" />
@@ -47,11 +38,7 @@ function Card({
             {addToFavorite && (
               <img
                 onClick={addToFavoriteHandle}
-                src={
-                  isAddedToFavoriteItems(id)
-                    ? "img/heart-liked.svg"
-                    : "img/heart-unliked.svg"
-                }
+                src={isAddedToFavoriteItems(id) ? 'img/heart-liked.svg' : 'img/heart-unliked.svg'}
                 alt="Unliked"
               />
             )}
@@ -67,9 +54,7 @@ function Card({
               <img
                 className={styles.plus}
                 onClick={addToCartHandle}
-                src={
-                  isAddedToCart(id) ? "img/btn-checked.svg" : "img/btn-plus.svg"
-                }
+                src={isAddedToCart(id) ? 'img/btn-checked.svg' : 'img/btn-plus.svg'}
                 alt="Plus"
               />
             )}
